@@ -13,8 +13,85 @@
     tools:context="com.example.warhammer40kcards.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <RelativeLayout
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:id="@+id/cL"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:text="@string/game_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/cL"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/whiteText"
+        android:id="@+id/gameSettings"
+        android:textSize="20sp"
+        android:layout_marginBottom="5sp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/psychers_warlord_traits_and_bonuses"
+        android:layout_below="@id/gameSettings"
+        android:id="@+id/psychic_cards"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginBottom="5sp"
+        android:onClick="pwtab"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/maelstorm_deck"
+        android:layout_below="@id/psychic_cards"
+        android:id="@+id/maelstrom_cards"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginBottom="5sp"
+        android:onClick="md" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/set_maelstrom_deck"
+        android:layout_above="@id/gameSettings"
+        android:id="@+id/maelstrom_cards_deck"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginBottom="5sp"
+        android:onClick="mcd" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/psychic_decks"
+        android:layout_above="@id/maelstrom_cards_deck"
+        android:id="@+id/psychic_decks"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginBottom="5sp"
+        android:onClick="pd" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="@string/setDecks"
+        android:layout_above="@id/psychic_decks"
+        android:id="@+id/setDeck"
+        android:textColor="@color/whiteText"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_marginBottom="5sp" />
 </RelativeLayout>

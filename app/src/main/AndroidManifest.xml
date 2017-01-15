@@ -18,6 +18,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".pwtab"
+            android:label="@string/title_activity_pwtab"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".md"
+            android:label="@string/title_activity_md"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".mcd"
+            android:label="@string/title_activity_mcd"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pd"
+            android:label="@string/title_activity_pd"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
