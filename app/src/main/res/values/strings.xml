@@ -11,4 +11,10 @@
     <string name="title_activity_md">md</string>
     <string name="title_activity_mcd">mcd</string>
     <string name="title_activity_pd">pd</string>
+    <string name="create_maelstrom">Create Maelstrom Deck</string>
+    <string name="modify_a_deck">Modify A Deck</string>
+    <string name="stuff">Delete A Deck</string>
+    <string name="title_activity_new_deck">NewDeck</string>
+    <string name="title_activity_mod_deck">ModDeck</string>
+    <string name="title_activity_delete_deck">DeleteDeck</string>
 </resources>

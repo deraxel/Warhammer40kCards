@@ -33,6 +33,18 @@
         <activity
             android:name=".pd"
             android:label="@string/title_activity_pd"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewDeck"
+            android:label="@string/title_activity_new_deck"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ModDeck"
+            android:label="@string/title_activity_mod_deck"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DeleteDeck"
+            android:label="@string/title_activity_delete_deck"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_mcd"
@@ -12,5 +13,52 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.warhammer40kcards.mcd"
     tools:showIn="@layout/activity_mcd">
+
+    <RelativeLayout
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:id="@+id/cL"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/create_maelstrom"
+        android:layout_above="@id/cL"
+        android:id="@+id/createDeck"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginBottom="15sp"
+        android:onClick="createdeck"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/modify_a_deck"
+        android:layout_below="@id/createDeck"
+        android:id="@+id/modifyDeck"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginBottom="15sp"
+        android:onClick="modifydeck"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:text="@string/stuff"
+        android:layout_below="@id/modifyDeck"
+        android:id="@+id/delete"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_marginBottom="15sp"
+        android:onClick="deleteDeck"/>
 
 </RelativeLayout>
