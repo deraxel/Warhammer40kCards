@@ -20,4 +20,7 @@
     <string name="create_a_new_deck">Create A New Deck</string>
     <string name="enter_the_number_of_cards">Enter the number of cards: </string>
     <string name="_36_std">36 std</string>
+    <string name="maelstrom_deck_title">Maelstrom Deck Title</string>
+    <string name="maeltrom_deck_title">Maeltrom Deck Title</string>
+    <string name="save">Save</string>
 </resources>
