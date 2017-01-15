@@ -17,4 +17,7 @@
     <string name="title_activity_new_deck">NewDeck</string>
     <string name="title_activity_mod_deck">ModDeck</string>
     <string name="title_activity_delete_deck">DeleteDeck</string>
+    <string name="create_a_new_deck">Create A New Deck</string>
+    <string name="enter_the_number_of_cards">Enter the number of cards: </string>
+    <string name="_36_std">36 std</string>
 </resources>
