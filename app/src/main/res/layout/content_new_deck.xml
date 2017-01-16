@@ -127,4 +127,104 @@
         android:visibility="invisible"
         android:inputType="number"/>
 
+    <TextView
+        android:text="@string/card_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardNumb"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardNumbAuto"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/cardNumb"
+        android:layout_toEndOf="@id/cardNumb"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:layout_width="30sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardNumbManual"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/cardNumb"
+        android:layout_toEndOf="@id/cardNumb"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:background="@color/backgroundButton"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:text="@string/of"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ofTextBoxM"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/cardNumbManual"
+        android:layout_toEndOf="@id/cardNumbManual"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalNumberofCards"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/ofTextBoxM"
+        android:layout_toEndOf="@id/ofTextBoxM"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:paddingLeft="5sp"
+        android:paddingStart="5sp"
+        android:paddingRight="0sp"
+        android:paddingEnd="0sp"
+        android:textColor="@color/blackText"
+        android:visibility="invisible"/>
+
+    <Button
+        android:text="@string/last"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardNumb"
+        android:id="@+id/last"
+        android:visibility="invisible"
+        android:onClick="onLast"/>
+
+    <Button
+        android:text="@string/next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/next"
+        android:visibility="invisible"
+        android:onClick="onNext"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/enter_card_details_here"
+        android:ems="10"
+        android:layout_below="@id/last"
+        android:layout_above="@id/next"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/description"
+        android:gravity="top|left"
+        android:visibility="invisible" />
 </RelativeLayout>

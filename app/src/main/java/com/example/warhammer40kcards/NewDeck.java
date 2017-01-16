@@ -23,23 +23,28 @@ import java.io.OutputStreamWriter;
 
 //010101000101110100100111 is the precode denoting a title radix encode for title
 //110001101000100000101 is the precode denoting the number of cards code radix encode for nocs
+//10001001110000111101000011 is the precode denoting the description of an individual card radix encode for descs
+//10001100000101010001100111 is the precode denoting the card display number radix encode for carnu
+//0000010111001111010010001100101 is the precode denoting the card's serial number radix encode for serial
 public class NewDeck extends AppCompatActivity {
 
-    EditText maeDecTitle, numOCards, deckStart;
+    EditText maeDecTitle, numOCards, deckStart, cardNumberManualM, descriptionM;
     Spinner cardsPerTens;
-    String fileTitle;
-    TextView cardRadix, numCards;
+    String fileTitle, putNum, putNum2= "";
+    TextView cardRadix, numCards, cardNumberM, cardNumberAutoM, totalNumberofCardsM,ofTextBoxM;
     ArrayAdapter<CharSequence> ztt;
-    Button saveButton;
+    Button saveButton, lastM, nextM;
     private CheckBox autoCount;
     static final int READ_BLOCK_SIZE = 1000;
     boolean aCount, flagSave =false;
-    int radix, start, totalcards;
+    boolean firstFlag=true;
+    int radix, startP, start, totalcards, cardCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_deck);
+        cardCount=0;
         ztt = ArrayAdapter.createFromResource(this, R.array.cardsPerTen, android.R.layout.simple_spinner_item);
         ztt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cardsPerTens = (Spinner) findViewById(R.id.radix);
@@ -47,10 +52,19 @@ public class NewDeck extends AppCompatActivity {
         maeDecTitle = (EditText) findViewById(R.id.deckTitle);
         numOCards = (EditText) findViewById(R.id.numCardsOutput);
         deckStart = (EditText) findViewById(R.id.cardStart);
+        cardNumberManualM = (EditText) findViewById(R.id.cardNumbManual);
+        descriptionM = (EditText) findViewById(R.id.description);
         autoCount=(CheckBox) findViewById(R.id.isAutoCount);
         cardRadix = (TextView) findViewById(R.id.radixCount);
         numCards = (TextView) findViewById(R.id.numCards);
+        cardNumberM = (TextView) findViewById(R.id.cardNumb);
+        cardNumberAutoM = (TextView) findViewById(R.id.cardNumbAuto);
+        ofTextBoxM = (TextView) findViewById(R.id.ofTextBoxM);
+        totalNumberofCardsM = (TextView) findViewById(R.id.totalNumberofCards);
         saveButton = (Button) findViewById(R.id.savebutton);
+        lastM = (Button) findViewById(R.id.last);
+        nextM = (Button) findViewById(R.id.next);
+
         autoCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,34 +119,51 @@ public class NewDeck extends AppCompatActivity {
     }
 
     public void saveButton(View view){
-        try {
-            fileTitle = maeDecTitle.getText().toString();
-            if (!fileTitle.equals("")) {
-                FileOutputStream fileout, titleout;
-                fileout = openFileOutput(fileTitle + ".txt", MODE_PRIVATE);
-                titleout = openFileOutput("listofdecks.txt", MODE_PRIVATE);
-                OutputStreamWriter listoftitles = new OutputStreamWriter(titleout);
+        String s = "";
+        fileTitle = maeDecTitle.getText().toString();
+        if (!fileTitle.equals("")) {
+            try{
                 FileInputStream fileIn = openFileInput("listofdecks.txt");
                 InputStreamReader InputRead = new InputStreamReader(fileIn);
                 char[] inputBuffer = new char[READ_BLOCK_SIZE];
-                String s = "";
                 int charRead;
                 while ((charRead = InputRead.read(inputBuffer)) > 0) {
                     String readstring = String.copyValueOf(inputBuffer, 0, charRead);
                     s += readstring;
                 }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try {
+                FileOutputStream fileout, titleout;
+                fileout = openFileOutput(fileTitle + ".txt", MODE_PRIVATE);
+                titleout = openFileOutput("listofdecks.txt", MODE_PRIVATE);
+                OutputStreamWriter listoftitles = new OutputStreamWriter(titleout);
                 s = s + "010101000101110100100111" + fileTitle + ".txt";
                 listoftitles.write(s);
                 listoftitles.close();
+
                 OutputStreamWriter fileoutDeck = new OutputStreamWriter(fileout);
-                s = "";
-                s = "010101000101110100100111" + fileTitle + "110001101000100000101" + numOCards.getText().toString();
+                s = "~010101000101110100100111~" + fileTitle + "~110001101000100000101~" + numOCards.getText().toString();
                 fileoutDeck.write(s);
                 fileoutDeck.close();
                 totalcards = Integer.parseInt(numOCards.getText().toString());
                 if (aCount) {
                     start = Integer.parseInt(deckStart.getText().toString());
+                    cardNumberAutoM.setVisibility(View.VISIBLE);
+                    String stuff = start + "";
+                    cardNumberAutoM.setText(stuff);
+                } else {
+                    cardNumberManualM.setVisibility(View.VISIBLE);
                 }
+                totalNumberofCardsM.setText(numOCards.getText().toString());
+                ofTextBoxM.setVisibility(View.VISIBLE);
+                cardNumberM.setVisibility(View.VISIBLE);
+                cardNumberAutoM.setVisibility(View.VISIBLE);
+                totalNumberofCardsM.setVisibility(View.VISIBLE);
+                descriptionM.setVisibility(View.VISIBLE);
+                lastM.setVisibility(View.VISIBLE);
+                nextM.setVisibility(View.VISIBLE);
                 maeDecTitle.setVisibility(View.INVISIBLE);
                 numOCards.setVisibility(View.INVISIBLE);
                 numCards.setVisibility(View.INVISIBLE);
@@ -142,13 +173,113 @@ public class NewDeck extends AppCompatActivity {
                 cardRadix.setVisibility(View.INVISIBLE);
                 autoCount.setVisibility(View.INVISIBLE);
                 flagSave = true;
-            }else{
+            } catch (Exception e){
                 Toast.makeText(getBaseContext(), "YOU MUST FILL EVERY SECTION", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
-        } catch (Exception e){
+        }else{
             Toast.makeText(getBaseContext(), "YOU MUST FILL EVERY SECTION", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
         }
     }
 
+    public void onLast(View view){
+        if(cardCount>0){
+            cardCount-=1;
+            String s = "";
+            String s1 = "";
+            try{
+                FileInputStream fileIn = openFileInput(fileTitle + ".txt");
+                InputStreamReader InputRead = new InputStreamReader(fileIn);
+                char[] inputBuffer = new char[READ_BLOCK_SIZE];
+                int charRead;
+                while ((charRead = InputRead.read(inputBuffer)) > 0) {
+                    String readstring = String.copyValueOf(inputBuffer, 0, charRead);
+                    s += readstring;
+                    s1 += readstring;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            try{
+                String temp, temp2;
+                temp=""+cardCount;
+                String delim=temp+"~10001100000101010001100111~";
+                String[] token=s1.split(delim);
+                delim="~10001001110000111101000011~";
+                temp2=token[1];
+                String[] token2=temp2.split(delim);
+                if(aCount) {
+                    start-=1;
+                    cardNumberAutoM.setText(token2[0]);
+                }
+                String delims="~0000010111001111010010001100101~"+temp;
+                String[] tokens=s.split(delims);
+                FileOutputStream fileout;
+                fileout = openFileOutput(fileTitle + ".txt", MODE_PRIVATE);
+                OutputStreamWriter fileoutDeck = new OutputStreamWriter(fileout);
+                fileoutDeck.write(tokens[0]);
+                fileoutDeck.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public void onNext(View view){
+        if(cardCount+1<=totalcards) {
+            if (aCount) {
+                storeCard(descriptionM.getText().toString(), cardNumberAutoM.getText().toString(), cardCount);
+            }else{
+                storeCard(descriptionM.getText().toString(), cardNumberManualM.getText().toString(), cardCount);
+            }
+            int temp1, temp2;
+            if (aCount) {
+                temp1=start%10;
+                temp2=start/10;
+                putNum=1+temp1+"";
+                putNum2=temp2+"";
+                putNum=putNum2+putNum;
+                start+=1;
+                cardNumberAutoM.setText(putNum);
+                if(temp1+1==radix){
+                    start+=10;
+                    start-=radix;
+                }
+            }else{
+                putNum=cardNumberManualM.getText().toString();
+            }
+            cardCount += 1;
+        } else {
+            //go back one
+        }
+    }
+    public void storeCard(String desc, String num, int serialNum){
+        String s="";
+        try{
+            FileInputStream fileIn = openFileInput(fileTitle + ".txt");
+            InputStreamReader InputRead = new InputStreamReader(fileIn);
+            char[] inputBuffer = new char[READ_BLOCK_SIZE];
+            int charRead;
+            while ((charRead = InputRead.read(inputBuffer)) > 0) {
+                String readstring = String.copyValueOf(inputBuffer, 0, charRead);
+                s += readstring;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            FileOutputStream fileout;
+            fileout = openFileOutput(fileTitle + ".txt", MODE_PRIVATE);
+            OutputStreamWriter fileoutDeck = new OutputStreamWriter(fileout);
+            String sN = serialNum+"";
+            s = "~0000010111001111010010001100101~" + sN +"~10001100000101010001100111~" +
+                    num + "~10001001110000111101000011~" + desc;
+            fileoutDeck.write(s);
+            fileoutDeck.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 }

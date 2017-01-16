@@ -26,9 +26,13 @@
     <string name="autocount">Autocount</string>
     <string name="card_start_number">Card Start Number (11 std)</string>
     <string name="cards_per_10_6_std">cards per 10 (6 std)</string>
+    <string name="card_number">Card Number:</string>
+    <string name="next">NEXT</string>
+    <string name="last">LAST</string>
+    <string name="enter_card_details_here">Enter Card Details Here</string>
+    <string name="of">of</string>
     <string-array name="cardsPerTen"><item>1</item><item>2</item><item>3</item>
         <item>4</item><item>5</item><item>6</item><item>7</item>
-        <item>8</item><item>9</item><item>10</item><item>11</item>
-        <item>12</item><item>13</item>
+        <item>8</item><item>9</item>
     </string-array>
 </resources>
