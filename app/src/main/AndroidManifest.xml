@@ -37,7 +37,8 @@
         <activity
             android:name=".NewDeck"
             android:label="@string/title_activity_new_deck"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ModDeck"
             android:label="@string/title_activity_mod_deck"
@@ -45,7 +46,7 @@
         <activity
             android:name=".DeleteDeck"
             android:label="@string/title_activity_delete_deck"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
