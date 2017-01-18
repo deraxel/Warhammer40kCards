@@ -76,9 +76,8 @@ public class DeleteDeck extends AppCompatActivity {
             deleteFile(temp);
             s = "";
             for (int i = 0; i < token.length; i++) {
-                if (!token[i].equals(temp)) {
+                if (!(token[i].equals(temp) || token[i].equals(""))) {
                     s = s + "010101000101110100100111" + token[i];
-                    //Toast.makeText(getBaseContext(), token[i], Toast.LENGTH_LONG).show();
                 }
             }
             Toast.makeText(getBaseContext(), s, Toast.LENGTH_LONG).show();
