@@ -13,4 +13,88 @@
     tools:context="com.example.warhammer40kcards.DeleteDeck"
     tools:showIn="@layout/activity_delete_deck">
 
+    <Button
+        android:text="@string/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/delete"
+        android:visibility="visible"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"
+        android:onClick="deleteClick"/>
+
+    <RelativeLayout
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/cL"
+        android:visibility="invisible"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20sp"
+        android:layout_marginTop="20sp"
+        android:id="@+id/listOFiles"
+        android:layout_above="@id/delete"
+        android:visibility="visible"
+        android:background="@color/backgroundButton" />
+
+    <TextView
+        android:text="@string/list_of_decks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/listOFiles"
+        android:id="@+id/decks"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"/>
+
+    <Button
+        android:text="@string/confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/cL"
+        android:layout_toStartOf="@+id/cL"
+        android:layout_marginRight="20sp"
+        android:layout_marginEnd="20sp"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"
+        android:id="@+id/confirm"
+        android:visibility="invisible"
+        android:onClick="confirmClick"/>
+
+    <Button
+        android:text="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/cL"
+        android:layout_toEndOf="@+id/cL"
+        android:layout_marginRight="20sp"
+        android:layout_marginEnd="20sp"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"
+        android:id="@+id/cancel"
+        android:visibility="invisible"
+        android:onClick="cancelClick"/>
+
+    <Button
+        android:text="@string/go_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/delete"
+        android:id="@+id/goBack"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"
+        android:layout_marginTop="20sp"
+        android:onClick="goBackClick"/>
+
 </RelativeLayout>

@@ -140,6 +140,8 @@
         android:textColor="@color/blackText"
         android:visibility="invisible"/>
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -173,6 +175,45 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@id/cardNumbManual"
         android:layout_toEndOf="@id/cardNumbManual"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardTotalSerial"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:visibility="invisible"/>
+    <TextView
+        android:text="@string/of"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/otherOfTextBoxM"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/cardTotalSerial"
+        android:layout_toStartOf="@id/cardTotalSerial"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="5sp"
+        android:paddingEnd="5sp"
+        android:paddingRight="5sp"
+        android:paddingStart="5sp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:visibility="invisible"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/serialNum"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/otherOfTextBoxM"
+        android:layout_toStartOf="@id/otherOfTextBoxM"
         android:layout_marginTop="50dp"
         android:textSize="20sp"
         android:textColor="@color/blackText"

@@ -1,5 +1,6 @@
 package com.example.warhammer40kcards;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,7 +32,7 @@ public class NewDeck extends AppCompatActivity {
     EditText maeDecTitle, numOCards, deckStart, cardNumberManualM, descriptionM;
     Spinner cardsPerTens;
     String fileTitle, putNum, putNum2= "";
-    TextView cardRadix, numCards, cardNumberM, cardNumberAutoM, totalNumberofCardsM,ofTextBoxM;
+    TextView cardRadix, numCards, cardNumberM, cardNumberAutoM, totalNumberofCardsM,ofTextBoxM, cardTotalSerial, otherOfTextBoxM,serialNum;
     ArrayAdapter<CharSequence> ztt;
     Button saveButton, lastM, nextM;
     private CheckBox autoCount;
@@ -61,6 +62,9 @@ public class NewDeck extends AppCompatActivity {
         cardNumberAutoM = (TextView) findViewById(R.id.cardNumbAuto);
         ofTextBoxM = (TextView) findViewById(R.id.ofTextBoxM);
         totalNumberofCardsM = (TextView) findViewById(R.id.totalNumberofCards);
+        cardTotalSerial = (TextView) findViewById(R.id.cardTotalSerial);
+        otherOfTextBoxM = (TextView) findViewById(R.id.otherOfTextBoxM);
+        serialNum = (TextView) findViewById(R.id.serialNum);
         saveButton = (Button) findViewById(R.id.savebutton);
         lastM = (Button) findViewById(R.id.last);
         nextM = (Button) findViewById(R.id.next);
@@ -140,6 +144,8 @@ public class NewDeck extends AppCompatActivity {
                 titleout = openFileOutput("listofdecks.txt", MODE_PRIVATE);
                 OutputStreamWriter listoftitles = new OutputStreamWriter(titleout);
                 s = s + "010101000101110100100111" + fileTitle + ".txt";
+
+                Toast.makeText(getBaseContext(), s, Toast.LENGTH_LONG).show();
                 listoftitles.write(s);
                 listoftitles.close();
 
@@ -156,11 +162,31 @@ public class NewDeck extends AppCompatActivity {
                 } else {
                     cardNumberManualM.setVisibility(View.VISIBLE);
                 }
-                totalNumberofCardsM.setText(numOCards.getText().toString());
-                ofTextBoxM.setVisibility(View.VISIBLE);
+                if(aCount) {
+                    int totalCardNum, totalCardCountRad;
+                    totalCardCountRad = start - 1;
+                    totalCardNum = Integer.parseInt(numOCards.getText().toString());
+                    for (int i = 1; i < totalCardNum; i++) {
+                        totalCardCountRad = 1 + totalCardCountRad;
+                        if (((totalCardCountRad) % 10) == radix) {
+                            totalCardCountRad += 10;
+                            totalCardCountRad -= radix;
+                        }
+                    }
+                    totalCardCountRad = 1 + totalCardCountRad;
+                    String totalCardRadString = "" + totalCardCountRad;
+                    totalNumberofCardsM.setText(totalCardRadString);
+                    totalNumberofCardsM.setVisibility(View.VISIBLE);
+                    ofTextBoxM.setVisibility(View.VISIBLE);
+                }
+                String thing = ""+(Integer.parseInt(numOCards.getText().toString())-1);
+                cardTotalSerial.setVisibility(View.VISIBLE);
+                otherOfTextBoxM.setVisibility(View.VISIBLE);
+                serialNum.setVisibility(View.VISIBLE);
+                cardTotalSerial.setText(thing);
+                serialNum.setText("0");
                 cardNumberM.setVisibility(View.VISIBLE);
                 cardNumberAutoM.setVisibility(View.VISIBLE);
-                totalNumberofCardsM.setVisibility(View.VISIBLE);
                 descriptionM.setVisibility(View.VISIBLE);
                 lastM.setVisibility(View.VISIBLE);
                 nextM.setVisibility(View.VISIBLE);
@@ -198,7 +224,7 @@ public class NewDeck extends AppCompatActivity {
                     s1 += readstring;
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                e.printStackTrace();Toast.makeText(getBaseContext(), "fail1", Toast.LENGTH_LONG).show();
             }
             try{
                 String temp, temp2;
@@ -219,7 +245,12 @@ public class NewDeck extends AppCompatActivity {
                 OutputStreamWriter fileoutDeck = new OutputStreamWriter(fileout);
                 fileoutDeck.write(tokens[0]);
                 fileoutDeck.close();
-            }catch (Exception e){
+                int temp1=start%10;
+                if(temp1==0) {
+                    start -= 10;
+                    start += radix;
+                }
+                }catch (Exception e){
                 e.printStackTrace();
             }
 
@@ -227,7 +258,7 @@ public class NewDeck extends AppCompatActivity {
     }
 
     public void onNext(View view){
-        if(cardCount+1<=totalcards) {
+        if(cardCount+2<=totalcards) {
             if (aCount) {
                 storeCard(descriptionM.getText().toString(), cardNumberAutoM.getText().toString(), cardCount);
             }else{
@@ -250,10 +281,16 @@ public class NewDeck extends AppCompatActivity {
                 putNum=cardNumberManualM.getText().toString();
             }
             cardCount += 1;
+            String thing = cardCount+"";
+            serialNum.setText(thing);
         } else {
-            //go back one
+            Intent mcd = new Intent(getApplicationContext(), mcd.class);
+            mcd.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(mcd);
         }
+        descriptionM.setText("");
     }
+
     public void storeCard(String desc, String num, int serialNum){
         String s="";
         try{
@@ -273,7 +310,7 @@ public class NewDeck extends AppCompatActivity {
             fileout = openFileOutput(fileTitle + ".txt", MODE_PRIVATE);
             OutputStreamWriter fileoutDeck = new OutputStreamWriter(fileout);
             String sN = serialNum+"";
-            s = "~0000010111001111010010001100101~" + sN +"~10001100000101010001100111~" +
+            s = s+"~0000010111001111010010001100101~" + sN +"~10001100000101010001100111~" +
                     num + "~10001001110000111101000011~" + desc;
             fileoutDeck.write(s);
             fileoutDeck.close();

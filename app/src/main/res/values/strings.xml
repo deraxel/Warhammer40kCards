@@ -31,6 +31,12 @@
     <string name="last">LAST</string>
     <string name="enter_card_details_here">Enter Card Details Here</string>
     <string name="of">of</string>
+    <string name="delete_a_deck">Delete A Deck</string>
+    <string name="delete">DELETE</string>
+    <string name="list_of_decks">LIST OF DECKS</string>
+    <string name="confirm">CONFIRM</string>
+    <string name="cancel">CANCEL</string>
+    <string name="go_back">GO BACK</string>
     <string-array name="cardsPerTen"><item>1</item><item>2</item><item>3</item>
         <item>4</item><item>5</item><item>6</item><item>7</item>
         <item>8</item><item>9</item>

@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.warhammer40kcards.DeleteDeck">
+    tools:context="com.example.warhammer40kcards.DeleteDeck"
+    android:background="@color/backgroundWhite">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"/>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,8 +19,15 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <TextView
+            android:text="@string/delete_a_deck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/whiteText"
+            android:textSize="30sp"
+            android:id="@+id/titleText"
+            android:paddingTop="7sp"/>
 
-    </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_delete_deck" />
 
