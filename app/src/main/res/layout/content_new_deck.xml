@@ -71,7 +71,9 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/savebutton"
         android:visibility="visible"
-        android:onClick="saveButton"/>
+        android:onClick="saveButton"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"/>
 
     <CheckBox
         android:text="@string/autocount"
@@ -268,4 +270,16 @@
         android:id="@+id/description"
         android:gravity="top|left"
         android:visibility="invisible" />
+
+    <Button
+        android:text="@string/go_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/savebutton"
+        android:id="@+id/goBack"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"
+        android:layout_marginTop="20sp"
+        android:onClick="goBackClick"/>
 </RelativeLayout>

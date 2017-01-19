@@ -80,7 +80,6 @@ public class DeleteDeck extends AppCompatActivity {
                     s = s + "010101000101110100100111" + token[i];
                 }
             }
-            Toast.makeText(getBaseContext(), s, Toast.LENGTH_LONG).show();
             FileOutputStream fileout;
             deleteFile("listofdecks.txt");
             fileout = openFileOutput("listofdecks.txt", MODE_PRIVATE);

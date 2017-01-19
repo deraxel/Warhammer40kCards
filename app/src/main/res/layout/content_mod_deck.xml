@@ -20,7 +20,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/modifyDeck"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:background="@color/backgroundButton"
         android:textColor="@color/blackText"
         android:onClick="modifyDeckClick"/>
@@ -41,7 +41,7 @@
         android:layout_marginTop="20sp"
         android:id="@+id/listOFiles"
         android:layout_above="@id/modifyDeck"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:background="@color/backgroundButton" />
 
     <TextView
@@ -51,7 +51,7 @@
         android:layout_above="@id/listOFiles"
         android:id="@+id/decks"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:textSize="20sp"
         android:textColor="@color/blackText"/>
 
@@ -74,7 +74,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/modifySpecificDeck"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:background="@color/backgroundButton"
         android:textColor="@color/blackText"
         android:onClick="modifySpecificDeckClick"/>
@@ -86,10 +86,13 @@
         android:layout_below="@+id/goBack"
         android:layout_alignRight="@id/cL"
         android:layout_alignEnd="@id/cL"
-        android:id="@+id/radioButton"
+        android:id="@+id/getCardNumbers"
+        android:textColor="@color/blackText"
         android:layout_marginTop="20sp"
         android:layout_marginRight="20sp"
-        android:layout_marginEnd="20sp"/>
+        android:layout_marginEnd="20sp"
+        android:onClick="getCardNumbersClick"
+        android:visibility="invisible"/>
 
     <RadioButton
         android:text="@string/get_card_by_serial_number"
@@ -98,10 +101,142 @@
         android:layout_below="@+id/goBack"
         android:layout_alignLeft="@id/cL"
         android:layout_alignStart="@id/cL"
-        android:id="@+id/radioButton2"
+        android:id="@+id/getSerialNumbers"
+        android:textColor="@color/blackText"
         android:layout_marginTop="20sp"
         android:layout_marginStart="20sp"
-        android:layout_marginLeft="20sp"/>
+        android:layout_marginLeft="20sp"
+        android:onClick="getSerialNumbersClick"
+        android:visibility="invisible"/>
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/modifyDeck"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/listOFiles"
+        android:layout_alignBottom="@+id/listOFiles"
+        android:visibility="invisible"
+        android:id="@+id/listofcards"
+        android:background="@color/backgroundButton"/>
+
+    <TextView
+        android:text="@string/list_of_cards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/decks"
+        android:layout_alignBottom="@+id/decks"
+        android:visibility="invisible"
+        android:id="@+id/listofcardstext"
+        android:textColor="@color/blackText"
+        android:textSize="20sp"/>
+
+    <Button
+        android:text="@string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/cL"
+        android:layout_alignEnd="@+id/cL"
+        android:id="@+id/goBack2"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"
+        android:layout_marginRight="10sp"
+        android:layout_marginEnd="10sp"
+        android:onClick="goBackClick"
+        android:visibility="invisible"/>
+
+    <Button
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/cL"
+        android:layout_alignStart="@+id/cL"
+        android:id="@+id/saveCard"
+        android:background="@color/backgroundButton"
+        android:textColor="@color/blackText"
+        android:layout_marginLeft="10sp"
+        android:layout_marginStart="10sp"
+        android:onClick="saveCard"
+        android:visibility="invisible" />
+
+    <TextView
+        android:text="@string/card_number2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="5sp"
+        android:layout_marginRight="5sp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:id="@+id/CardNumberText"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/CardNumberText"
+        android:layout_alignBottom="@id/CardNumberText"
+        android:layout_toRightOf="@id/CardNumberText"
+        android:layout_toEndOf="@id/CardNumberText"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:id="@+id/CardNumberOutput"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/CardNumberText"
+        android:layout_alignBottom="@id/CardNumberText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5sp"
+        android:layout_marginLeft="5sp"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:id="@+id/SerialNumberOutput"
+        android:visibility="invisible" />
+
+    <TextView
+        android:text="@string/serial_number1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/CardNumberText"
+        android:layout_alignBottom="@id/CardNumberText"
+        android:layout_toLeftOf="@id/SerialNumberOutput"
+        android:layout_toStartOf="@id/SerialNumberOutput"
+        android:textSize="20sp"
+        android:textColor="@color/blackText"
+        android:id="@+id/SerialNumberText"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:layout_width="0sp"
+        android:layout_height="0sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/saveCard"
+        android:id="@+id/buttonslayoutline"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/CardNumberText"
+        android:layout_alignBottom="@id/buttonslayoutline"
+        android:ems="10"
+        android:layout_above="@+id/decks"
+        android:id="@+id/newDesc"
+        android:visibility="invisible"
+        android:gravity="top|left" />
 
 </RelativeLayout>
