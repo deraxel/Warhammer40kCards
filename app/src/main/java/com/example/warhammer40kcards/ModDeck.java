@@ -1,6 +1,7 @@
 package com.example.warhammer40kcards;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class ModDeck extends AppCompatActivity {
     Button modifyDeck,goBack,modifySpecificDeck,goBack2,saveCard;
@@ -28,6 +31,7 @@ public class ModDeck extends AppCompatActivity {
     RadioButton getCardNumbers,getSerialNumbers;
     boolean serialNumFlag;
     EditText newDesc;
+    int screenNumber=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class ModDeck extends AppCompatActivity {
             Intent md = new Intent(getApplicationContext(), ModDeck.class);
             md.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(md);
+            screenNumber=0;
         }else{
             listofcardstext.setVisibility(View.VISIBLE);
             listofcards.setVisibility(View.VISIBLE);
@@ -77,6 +82,7 @@ public class ModDeck extends AppCompatActivity {
             goBack2.setVisibility(View.INVISIBLE);
             saveCard.setVisibility(View.INVISIBLE);
             newDesc.setVisibility(View.INVISIBLE);
+            screenNumber=1;
         }
     }
 
@@ -115,6 +121,7 @@ public class ModDeck extends AppCompatActivity {
             goBack2.setVisibility(View.VISIBLE);
             saveCard.setVisibility(View.VISIBLE);
             newDesc.setVisibility(View.VISIBLE);
+            screenNumber=2;
         } else{
             Toast.makeText(getBaseContext(), "SELECT A CARD", Toast.LENGTH_LONG).show();
         }
@@ -131,6 +138,7 @@ public class ModDeck extends AppCompatActivity {
             modifySpecificDeck.setVisibility(View.VISIBLE);
             getSerialNumbers.setVisibility(View.VISIBLE);
             getCardNumbers.setVisibility(View.VISIBLE);
+            screenNumber=1;
         } else{
             Toast.makeText(getBaseContext(), "SELECT A DECK", Toast.LENGTH_LONG).show();
         }
@@ -212,41 +220,23 @@ public class ModDeck extends AppCompatActivity {
 
     String getDesc(){
         String delim="~10001100000101010001100111~";
-        int index;
-        if(serialNumFlag)
-        {
-            index=0;
-        }else{
-            index=1;
+        String[] token = getCardAll().split(delim);
+        try{
+            return token[2];
+        }catch (Exception e){
+            return " ";
         }
-
-        String[] token = getCardAll(index).split(delim);
-        return token[2];
     }
 
     String getSerialNum(){
         String delim="~10001100000101010001100111~";
-        int index;
-        if(serialNumFlag)
-        {
-            index=0;
-        }else{
-            index=1;
-        }
-        String[] token = getCardAll(index).split(delim);
+        String[] token = getCardAll().split(delim);
         return token[0];
     }
 
     String getCardNum(){
         String delim="~10001100000101010001100111~";
-        int index;
-        if(serialNumFlag)
-        {
-            index=0;
-        }else{
-            index=1;
-        }
-        String[] token = getCardAll(index).split(delim);
+        String[] token = getCardAll().split(delim);
         return token[1];
     }
 
@@ -268,10 +258,17 @@ public class ModDeck extends AppCompatActivity {
         return s;
     }
 
-    String getCardAll(int index){
+    String getCardAll(){
+        int index;
         String thing="";
         String delim="~0000010111001111010010001100101~";
         String[] token1=getDeckAll().split(delim);
+        if(serialNumFlag)
+        {
+            index=0;
+        }else{
+            index=1;
+        }
         delim="~10001100000101010001100111~";
         for(int i=1; i<token1.length;i++){
             if(token1[i].split(delim)[index].equals(gtcn)){
@@ -281,7 +278,62 @@ public class ModDeck extends AppCompatActivity {
         return thing;
     }
 
-    public void saveCard(){
+    public void saveCard(View view){
+        String[] frontback=getDeckAll().split("~0000010111001111010010001100101~"+getCardAll());
+        try{
+            deleteFile(dtbm);
+            FileOutputStream fileout;
+            fileout = openFileOutput(dtbm, MODE_PRIVATE);
+            OutputStreamWriter fileoutDeck = new OutputStreamWriter(fileout);
+            fileoutDeck.write(frontback[0]+"~0000010111001111010010001100101~" + SerialNumberOutput.getText().toString()
+                    +"~10001100000101010001100111~" + CardNumberOutput.getText().toString()
+                    + "~10001100000101010001100111~" + newDesc.getText().toString() + frontback[1]);
+            fileoutDeck.close();
+            listofcardstext.setVisibility(View.VISIBLE);
+            listofcards.setVisibility(View.VISIBLE);
+            modifySpecificDeck.setVisibility(View.VISIBLE);
+            getSerialNumbers.setVisibility(View.VISIBLE);
+            getCardNumbers.setVisibility(View.VISIBLE);
+            goBack.setVisibility(View.VISIBLE);
+            CardNumberText.setVisibility(View.INVISIBLE);
+            CardNumberOutput.setVisibility(View.INVISIBLE);
+            SerialNumberText.setVisibility(View.INVISIBLE);
+            SerialNumberOutput.setVisibility(View.INVISIBLE);
+            goBack2.setVisibility(View.INVISIBLE);
+            saveCard.setVisibility(View.INVISIBLE);
+            newDesc.setVisibility(View.INVISIBLE);
+            screenNumber=1;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }    @Override
 
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(screenNumber==1){
+            modifyDeck.setVisibility(View.INVISIBLE);
+            listOFiles.setVisibility(View.INVISIBLE);
+            decks.setVisibility(View.INVISIBLE);
+            listofcardstext.setVisibility(View.VISIBLE);
+            listofcards.setVisibility(View.VISIBLE);
+            modifySpecificDeck.setVisibility(View.VISIBLE);
+            getSerialNumbers.setVisibility(View.VISIBLE);
+            getCardNumbers.setVisibility(View.VISIBLE);
+            goBack.setVisibility(View.VISIBLE);
+        }else if(screenNumber==2){
+            modifyDeck.setVisibility(View.INVISIBLE);
+            listOFiles.setVisibility(View.INVISIBLE);
+            decks.setVisibility(View.INVISIBLE);
+            CardNumberText.setVisibility(View.VISIBLE);
+            CardNumberOutput.setVisibility(View.VISIBLE);
+            SerialNumberText.setVisibility(View.VISIBLE);
+            SerialNumberOutput.setVisibility(View.VISIBLE);
+            goBack2.setVisibility(View.VISIBLE);
+            saveCard.setVisibility(View.VISIBLE);
+            newDesc.setVisibility(View.VISIBLE);
+            goBack.setVisibility(View.INVISIBLE);
+        }else{
+
+        }
     }
 }

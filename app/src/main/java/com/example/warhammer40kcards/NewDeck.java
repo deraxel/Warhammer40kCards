@@ -142,7 +142,7 @@ public class NewDeck extends AppCompatActivity {
             }
             try {
                 FileOutputStream fileout, titleout;
-                fileout = openFileOutput(fileTitle + ".txt", MODE_PRIVATE);
+                fileout = openFileOutput(fileTitle + ".txt", MODE_WORLD_WRITEABLE);
                 titleout = openFileOutput("listofdecks.txt", MODE_PRIVATE);
                 OutputStreamWriter listoftitles = new OutputStreamWriter(titleout);
                 s = s + "010101000101110100100111" + fileTitle + ".txt";
@@ -259,61 +259,74 @@ public class NewDeck extends AppCompatActivity {
     }
 
     public void onNext(View view){
-        if(cardCount+2<=totalcards) {
-            if (aCount) {
-                storeCard(descriptionM.getText().toString(), cardNumberAutoM.getText().toString(), cardCount);
-            }else{
-                storeCard(descriptionM.getText().toString(), cardNumberManualM.getText().toString(), cardCount);
-            }
-            int temp1, temp2;
-            if (aCount) {
-                temp1=start%10;
-                temp2=start/10;
-                putNum=1+temp1+"";
-                putNum2=temp2+"";
-                putNum=putNum2+putNum;
-                start+=1;
-                cardNumberAutoM.setText(putNum);
-                if(temp1+1==radix){
-                    start+=10;
-                    start-=radix;
-                }
-            }else{
-                putNum=cardNumberManualM.getText().toString();
-            }
-            cardCount += 1;
-            String thing = cardCount+"";
-            serialNum.setText(thing);
-        } else {
-            if (aCount) {
-                storeCard(descriptionM.getText().toString(), cardNumberAutoM.getText().toString(), cardCount);
-            }else{
-                storeCard(descriptionM.getText().toString(), cardNumberManualM.getText().toString(), cardCount);
-            }
-            int temp1, temp2;
-            if (aCount) {
-                temp1=start%10;
-                temp2=start/10;
-                putNum=1+temp1+"";
-                putNum2=temp2+"";
-                putNum=putNum2+putNum;
-                start+=1;
-                cardNumberAutoM.setText(putNum);
-                if(temp1+1==radix){
-                    start+=10;
-                    start-=radix;
-                }
-            }else{
-                putNum=cardNumberManualM.getText().toString();
-            }
-            cardCount += 1;
-            String thing = cardCount+"";
-            serialNum.setText(thing);
-            Intent mcd = new Intent(getApplicationContext(), mcd.class);
-            mcd.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(mcd);
+        String thingthing;
+        if(aCount){
+            thingthing=cardNumberAutoM.getText().toString();
+        }else{
+            thingthing=cardNumberManualM.getText().toString();
         }
-        descriptionM.setText("");
+        if(!(thingthing.equals("") || descriptionM.getText().toString().equals("") )) {
+            if (cardCount + 2 <= totalcards) {
+                if (aCount) {
+                    storeCard(descriptionM.getText().toString(), cardNumberAutoM.getText().toString(), cardCount);
+                } else {
+                    storeCard(descriptionM.getText().toString(), cardNumberManualM.getText().toString(), cardCount);
+                }
+                int temp1, temp2;
+                if (aCount) {
+                    temp1 = start % 10;
+                    temp2 = start / 10;
+                    putNum = 1 + temp1 + "";
+                    putNum2 = temp2 + "";
+                    putNum = putNum2 + putNum;
+                    start += 1;
+                    cardNumberAutoM.setText(putNum);
+                    if (temp1 + 1 == radix) {
+                        start += 10;
+                        start -= radix;
+                    }
+                } else {
+                    putNum = cardNumberManualM.getText().toString();
+                }
+                cardCount += 1;
+                String thing = cardCount + "";
+                serialNum.setText(thing);
+            } else {
+                if (aCount) {
+                    storeCard(descriptionM.getText().toString(), cardNumberAutoM.getText().toString(), cardCount);
+                } else {
+                    storeCard(descriptionM.getText().toString(), cardNumberManualM.getText().toString(), cardCount);
+                }
+                int temp1, temp2;
+                if (aCount) {
+                    temp1 = start % 10;
+                    temp2 = start / 10;
+                    putNum = 1 + temp1 + "";
+                    putNum2 = temp2 + "";
+                    putNum = putNum2 + putNum;
+                    start += 1;
+                    cardNumberAutoM.setText(putNum);
+                    if (temp1 + 1 == radix) {
+                        start += 10;
+                        start -= radix;
+                    }
+                } else {
+                    putNum = cardNumberManualM.getText().toString();
+                }
+                cardCount += 1;
+                String thing = cardCount + "";
+                serialNum.setText(thing);
+                Intent mcd = new Intent(getApplicationContext(), mcd.class);
+                mcd.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(mcd);
+            }
+            descriptionM.setText("");
+            if(!aCount){
+                cardNumberManualM.setText("");
+            }
+        }else {
+            Toast.makeText(getBaseContext(), "YOU MUST FILL EVERY SECTION", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void storeCard(String desc, String num, int serialNum){

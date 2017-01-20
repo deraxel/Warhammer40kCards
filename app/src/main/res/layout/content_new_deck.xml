@@ -167,7 +167,8 @@
         android:textSize="20sp"
         android:textColor="@color/blackText"
         android:background="@color/backgroundButton"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:inputType="text"/>
 
     <TextView
         android:text="@string/of"
@@ -258,7 +259,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:hint="@string/enter_card_details_here"
         android:ems="10"
         android:layout_below="@id/last"
@@ -268,8 +268,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/description"
-        android:gravity="top|left"
-        android:visibility="invisible" />
+        android:gravity="top|start"
+        android:visibility="invisible"
+        android:inputType="text|textCapSentences|textAutoCorrect|textMultiLine" />
 
     <Button
         android:text="@string/go_back"
